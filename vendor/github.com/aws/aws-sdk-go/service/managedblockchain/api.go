@@ -59,6 +59,8 @@ func (c *ManagedBlockchain) CreateMemberRequest(input *CreateMemberInput) (req *
 //
 // Creates a member within a Managed Blockchain network.
 //
+// Applies only to Hyperledger Fabric.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -66,39 +68,41 @@ func (c *ManagedBlockchain) CreateMemberRequest(input *CreateMemberInput) (req *
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation CreateMember for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A requested resource does not exist on the network. It may have been deleted
-//   or referenced inaccurately.
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
 //
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
+//   * ResourceAlreadyExistsException
 //   A resource request is issued for a resource that already exists.
 //
-//   * ErrCodeResourceNotReadyException "ResourceNotReadyException"
+//   * ResourceNotReadyException
 //   The requested resource exists but is not in a status that can complete the
 //   operation.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
+//   * ResourceLimitExceededException
 //   The maximum number of resources of that type already exist. Ensure the resources
 //   requested are within the boundaries of the service edition and your account
 //   limits.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
+//
+//   * TooManyTagsException
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateMember
 func (c *ManagedBlockchain) CreateMember(input *CreateMemberInput) (*CreateMemberOutput, error) {
@@ -168,6 +172,8 @@ func (c *ManagedBlockchain) CreateNetworkRequest(input *CreateNetworkInput) (req
 //
 // Creates a new blockchain network using Amazon Managed Blockchain.
 //
+// Applies only to Hyperledger Fabric.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -175,31 +181,33 @@ func (c *ManagedBlockchain) CreateNetworkRequest(input *CreateNetworkInput) (req
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation CreateNetwork for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
+//   * ResourceAlreadyExistsException
 //   A resource request is issued for a resource that already exists.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
+//   * ResourceLimitExceededException
 //   The maximum number of resources of that type already exist. Ensure the resources
 //   requested are within the boundaries of the service edition and your account
 //   limits.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
+//
+//   * TooManyTagsException
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateNetwork
 func (c *ManagedBlockchain) CreateNetwork(input *CreateNetworkInput) (*CreateNetworkOutput, error) {
@@ -253,7 +261,7 @@ func (c *ManagedBlockchain) CreateNodeRequest(input *CreateNodeInput) (req *requ
 	op := &request.Operation{
 		Name:       opCreateNode,
 		HTTPMethod: "POST",
-		HTTPPath:   "/networks/{networkId}/members/{memberId}/nodes",
+		HTTPPath:   "/networks/{networkId}/nodes",
 	}
 
 	if input == nil {
@@ -267,7 +275,11 @@ func (c *ManagedBlockchain) CreateNodeRequest(input *CreateNodeInput) (req *requ
 
 // CreateNode API operation for Amazon Managed Blockchain.
 //
-// Creates a peer node in a member.
+// Creates a node on the specified blockchain network.
+//
+// Applies to Hyperledger Fabric and Ethereum.
+//
+// Ethereum on Managed Blockchain is in preview release and is subject to change.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -276,39 +288,41 @@ func (c *ManagedBlockchain) CreateNodeRequest(input *CreateNodeInput) (req *requ
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation CreateNode for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A requested resource does not exist on the network. It may have been deleted
-//   or referenced inaccurately.
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
 //
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
+//   * ResourceAlreadyExistsException
 //   A resource request is issued for a resource that already exists.
 //
-//   * ErrCodeResourceNotReadyException "ResourceNotReadyException"
+//   * ResourceNotReadyException
 //   The requested resource exists but is not in a status that can complete the
 //   operation.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
+//   * ResourceLimitExceededException
 //   The maximum number of resources of that type already exist. Ensure the resources
 //   requested are within the boundaries of the service edition and your account
 //   limits.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
+//
+//   * TooManyTagsException
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateNode
 func (c *ManagedBlockchain) CreateNode(input *CreateNodeInput) (*CreateNodeOutput, error) {
@@ -380,6 +394,8 @@ func (c *ManagedBlockchain) CreateProposalRequest(input *CreateProposalInput) (r
 // network can vote on, for example, a proposal to add a new member to the network.
 // Any member can create a proposal.
 //
+// Applies only to Hyperledger Fabric.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -387,31 +403,33 @@ func (c *ManagedBlockchain) CreateProposalRequest(input *CreateProposalInput) (r
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation CreateProposal for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A requested resource does not exist on the network. It may have been deleted
-//   or referenced inaccurately.
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
 //
-//   * ErrCodeResourceNotReadyException "ResourceNotReadyException"
+//   * ResourceNotReadyException
 //   The requested resource exists but is not in a status that can complete the
 //   operation.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
+//
+//   * TooManyTagsException
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateProposal
 func (c *ManagedBlockchain) CreateProposal(input *CreateProposalInput) (*CreateProposalOutput, error) {
@@ -488,6 +506,8 @@ func (c *ManagedBlockchain) DeleteMemberRequest(input *DeleteMemberInput) (req *
 // If MemberId is the last member in a network specified by the last AWS account,
 // the network is deleted also.
 //
+// Applies only to Hyperledger Fabric.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -495,29 +515,29 @@ func (c *ManagedBlockchain) DeleteMemberRequest(input *DeleteMemberInput) (req *
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation DeleteMember for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A requested resource does not exist on the network. It may have been deleted
-//   or referenced inaccurately.
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
 //
-//   * ErrCodeResourceNotReadyException "ResourceNotReadyException"
+//   * ResourceNotReadyException
 //   The requested resource exists but is not in a status that can complete the
 //   operation.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
 //
@@ -573,7 +593,7 @@ func (c *ManagedBlockchain) DeleteNodeRequest(input *DeleteNodeInput) (req *requ
 	op := &request.Operation{
 		Name:       opDeleteNode,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/networks/{networkId}/members/{memberId}/nodes/{nodeId}",
+		HTTPPath:   "/networks/{networkId}/nodes/{nodeId}",
 	}
 
 	if input == nil {
@@ -588,8 +608,10 @@ func (c *ManagedBlockchain) DeleteNodeRequest(input *DeleteNodeInput) (req *requ
 
 // DeleteNode API operation for Amazon Managed Blockchain.
 //
-// Deletes a peer node from a member that your AWS account owns. All data on
-// the node is lost and cannot be recovered.
+// Deletes a node that your AWS account owns. All data on the node is lost and
+// cannot be recovered.
+//
+// Applies to Hyperledger Fabric and Ethereum.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -598,29 +620,29 @@ func (c *ManagedBlockchain) DeleteNodeRequest(input *DeleteNodeInput) (req *requ
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation DeleteNode for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A requested resource does not exist on the network. It may have been deleted
-//   or referenced inaccurately.
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
 //
-//   * ErrCodeResourceNotReadyException "ResourceNotReadyException"
+//   * ResourceNotReadyException
 //   The requested resource exists but is not in a status that can complete the
 //   operation.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
 //
@@ -692,6 +714,8 @@ func (c *ManagedBlockchain) GetMemberRequest(input *GetMemberInput) (req *reques
 //
 // Returns detailed information about a member.
 //
+// Applies only to Hyperledger Fabric.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -699,25 +723,25 @@ func (c *ManagedBlockchain) GetMemberRequest(input *GetMemberInput) (req *reques
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation GetMember for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A requested resource does not exist on the network. It may have been deleted
-//   or referenced inaccurately.
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
 //
@@ -789,6 +813,8 @@ func (c *ManagedBlockchain) GetNetworkRequest(input *GetNetworkInput) (req *requ
 //
 // Returns detailed information about a network.
 //
+// Applies to Hyperledger Fabric and Ethereum.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -796,25 +822,25 @@ func (c *ManagedBlockchain) GetNetworkRequest(input *GetNetworkInput) (req *requ
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation GetNetwork for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A requested resource does not exist on the network. It may have been deleted
-//   or referenced inaccurately.
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
 //
@@ -870,7 +896,7 @@ func (c *ManagedBlockchain) GetNodeRequest(input *GetNodeInput) (req *request.Re
 	op := &request.Operation{
 		Name:       opGetNode,
 		HTTPMethod: "GET",
-		HTTPPath:   "/networks/{networkId}/members/{memberId}/nodes/{nodeId}",
+		HTTPPath:   "/networks/{networkId}/nodes/{nodeId}",
 	}
 
 	if input == nil {
@@ -884,7 +910,9 @@ func (c *ManagedBlockchain) GetNodeRequest(input *GetNodeInput) (req *request.Re
 
 // GetNode API operation for Amazon Managed Blockchain.
 //
-// Returns detailed information about a peer node.
+// Returns detailed information about a node.
+//
+// Applies to Hyperledger Fabric and Ethereum.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -893,25 +921,25 @@ func (c *ManagedBlockchain) GetNodeRequest(input *GetNodeInput) (req *request.Re
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation GetNode for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A requested resource does not exist on the network. It may have been deleted
-//   or referenced inaccurately.
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
 //
@@ -983,6 +1011,8 @@ func (c *ManagedBlockchain) GetProposalRequest(input *GetProposalInput) (req *re
 //
 // Returns detailed information about a proposal.
 //
+// Applies only to Hyperledger Fabric.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -990,25 +1020,25 @@ func (c *ManagedBlockchain) GetProposalRequest(input *GetProposalInput) (req *re
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation GetProposal for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A requested resource does not exist on the network. It may have been deleted
-//   or referenced inaccurately.
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
 //
@@ -1084,7 +1114,9 @@ func (c *ManagedBlockchain) ListInvitationsRequest(input *ListInvitationsInput) 
 
 // ListInvitations API operation for Amazon Managed Blockchain.
 //
-// Returns a listing of all invitations made on the specified network.
+// Returns a list of all invitations for the current AWS account.
+//
+// Applies only to Hyperledger Fabric.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1093,30 +1125,30 @@ func (c *ManagedBlockchain) ListInvitationsRequest(input *ListInvitationsInput) 
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation ListInvitations for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A requested resource does not exist on the network. It may have been deleted
-//   or referenced inaccurately.
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
+//   * ResourceLimitExceededException
 //   The maximum number of resources of that type already exist. Ensure the resources
 //   requested are within the boundaries of the service edition and your account
 //   limits.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
 //
@@ -1185,10 +1217,12 @@ func (c *ManagedBlockchain) ListInvitationsPagesWithContext(ctx aws.Context, inp
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListInvitationsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListInvitationsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1242,7 +1276,9 @@ func (c *ManagedBlockchain) ListMembersRequest(input *ListMembersInput) (req *re
 
 // ListMembers API operation for Amazon Managed Blockchain.
 //
-// Returns a listing of the members in a network and properties of their configurations.
+// Returns a list of the members in a network and properties of their configurations.
+//
+// Applies only to Hyperledger Fabric.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1251,21 +1287,21 @@ func (c *ManagedBlockchain) ListMembersRequest(input *ListMembersInput) (req *re
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation ListMembers for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
 //
@@ -1334,10 +1370,12 @@ func (c *ManagedBlockchain) ListMembersPagesWithContext(ctx aws.Context, input *
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListMembersOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListMembersOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1391,8 +1429,9 @@ func (c *ManagedBlockchain) ListNetworksRequest(input *ListNetworksInput) (req *
 
 // ListNetworks API operation for Amazon Managed Blockchain.
 //
-// Returns information about the networks in which the current AWS account has
-// members.
+// Returns information about the networks in which the current AWS account participates.
+//
+// Applies to Hyperledger Fabric and Ethereum.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1401,21 +1440,21 @@ func (c *ManagedBlockchain) ListNetworksRequest(input *ListNetworksInput) (req *
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation ListNetworks for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
 //
@@ -1484,10 +1523,12 @@ func (c *ManagedBlockchain) ListNetworksPagesWithContext(ctx aws.Context, input 
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListNetworksOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListNetworksOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1521,7 +1562,7 @@ func (c *ManagedBlockchain) ListNodesRequest(input *ListNodesInput) (req *reques
 	op := &request.Operation{
 		Name:       opListNodes,
 		HTTPMethod: "GET",
-		HTTPPath:   "/networks/{networkId}/members/{memberId}/nodes",
+		HTTPPath:   "/networks/{networkId}/nodes",
 		Paginator: &request.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
@@ -1543,6 +1584,8 @@ func (c *ManagedBlockchain) ListNodesRequest(input *ListNodesInput) (req *reques
 //
 // Returns information about the nodes within a network.
 //
+// Applies to Hyperledger Fabric and Ethereum.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -1550,21 +1593,21 @@ func (c *ManagedBlockchain) ListNodesRequest(input *ListNodesInput) (req *reques
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation ListNodes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
 //
@@ -1633,10 +1676,12 @@ func (c *ManagedBlockchain) ListNodesPagesWithContext(ctx aws.Context, input *Li
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListNodesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListNodesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1690,8 +1735,10 @@ func (c *ManagedBlockchain) ListProposalVotesRequest(input *ListProposalVotesInp
 
 // ListProposalVotes API operation for Amazon Managed Blockchain.
 //
-// Returns the listing of votes for a specified proposal, including the value
-// of each vote and the unique identifier of the member that cast the vote.
+// Returns the list of votes for a specified proposal, including the value of
+// each vote and the unique identifier of the member that cast the vote.
+//
+// Applies only to Hyperledger Fabric.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1700,21 +1747,21 @@ func (c *ManagedBlockchain) ListProposalVotesRequest(input *ListProposalVotesInp
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation ListProposalVotes for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
 //
@@ -1783,10 +1830,12 @@ func (c *ManagedBlockchain) ListProposalVotesPagesWithContext(ctx aws.Context, i
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListProposalVotesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListProposalVotesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -1840,7 +1889,9 @@ func (c *ManagedBlockchain) ListProposalsRequest(input *ListProposalsInput) (req
 
 // ListProposals API operation for Amazon Managed Blockchain.
 //
-// Returns a listing of proposals for the network.
+// Returns a list of proposals for the network.
+//
+// Applies only to Hyperledger Fabric.
 //
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
@@ -1849,25 +1900,25 @@ func (c *ManagedBlockchain) ListProposalsRequest(input *ListProposalsInput) (req
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation ListProposals for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A requested resource does not exist on the network. It may have been deleted
-//   or referenced inaccurately.
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
 //
@@ -1936,11 +1987,111 @@ func (c *ManagedBlockchain) ListProposalsPagesWithContext(ctx aws.Context, input
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListProposalsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListProposalsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
+}
+
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// client's request for the ListTagsForResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See ListTagsForResource for more information on using the ListTagsForResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//
+//    // Example sending a request using the ListTagsForResourceRequest method.
+//    req, resp := client.ListTagsForResourceRequest(params)
+//
+//    err := req.Send()
+//    if err == nil { // resp is now filled
+//        fmt.Println(resp)
+//    }
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListTagsForResource
+func (c *ManagedBlockchain) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
+	op := &request.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "GET",
+		HTTPPath:   "/tags/{resourceArn}",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output = &ListTagsForResourceOutput{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// ListTagsForResource API operation for Amazon Managed Blockchain.
+//
+// Returns a list of tags for the specified resource. Each tag consists of a
+// key and optional value.
+//
+// For more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Managed Blockchain's
+// API operation ListTagsForResource for usage and error information.
+//
+// Returned Error Types:
+//   * InternalServiceErrorException
+//   The request processing has failed because of an unknown error, exception
+//   or failure.
+//
+//   * InvalidRequestException
+//   The action or operation requested is invalid. Verify that the action is typed
+//   correctly.
+//
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
+//
+//   * ResourceNotReadyException
+//   The requested resource exists but is not in a status that can complete the
+//   operation.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListTagsForResource
+func (c *ManagedBlockchain) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	return out, req.Send()
+}
+
+// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See ListTagsForResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ManagedBlockchain) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+	req, out := c.ListTagsForResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
 }
 
 const opRejectInvitation = "RejectInvitation"
@@ -1992,6 +2143,8 @@ func (c *ManagedBlockchain) RejectInvitationRequest(input *RejectInvitationInput
 // in an AWS account that has received an invitation to create a member and
 // join a network.
 //
+// Applies only to Hyperledger Fabric.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -1999,27 +2152,27 @@ func (c *ManagedBlockchain) RejectInvitationRequest(input *RejectInvitationInput
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation RejectInvitation for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeIllegalActionException "IllegalActionException"
+//   * IllegalActionException
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A requested resource does not exist on the network. It may have been deleted
-//   or referenced inaccurately.
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
 //
@@ -2040,6 +2193,411 @@ func (c *ManagedBlockchain) RejectInvitation(input *RejectInvitationInput) (*Rej
 // for more information on using Contexts.
 func (c *ManagedBlockchain) RejectInvitationWithContext(ctx aws.Context, input *RejectInvitationInput, opts ...request.Option) (*RejectInvitationOutput, error) {
 	req, out := c.RejectInvitationRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opTagResource = "TagResource"
+
+// TagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the TagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See TagResource for more information on using the TagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//
+//    // Example sending a request using the TagResourceRequest method.
+//    req, resp := client.TagResourceRequest(params)
+//
+//    err := req.Send()
+//    if err == nil { // resp is now filled
+//        fmt.Println(resp)
+//    }
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/TagResource
+func (c *ManagedBlockchain) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
+	op := &request.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/tags/{resourceArn}",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output = &TagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// TagResource API operation for Amazon Managed Blockchain.
+//
+// Adds or overwrites the specified tags for the specified Amazon Managed Blockchain
+// resource. Each tag consists of a key and optional value.
+//
+// When you specify a tag key that already exists, the tag value is overwritten
+// with the new value. Use UntagResource to remove tag keys.
+//
+// A resource can have up to 50 tags. If you try to create more than 50 tags
+// for a resource, your request fails and returns an error.
+//
+// For more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Managed Blockchain's
+// API operation TagResource for usage and error information.
+//
+// Returned Error Types:
+//   * InternalServiceErrorException
+//   The request processing has failed because of an unknown error, exception
+//   or failure.
+//
+//   * InvalidRequestException
+//   The action or operation requested is invalid. Verify that the action is typed
+//   correctly.
+//
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
+//
+//   * TooManyTagsException
+//
+//   * ResourceNotReadyException
+//   The requested resource exists but is not in a status that can complete the
+//   operation.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/TagResource
+func (c *ManagedBlockchain) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	return out, req.Send()
+}
+
+// TagResourceWithContext is the same as TagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See TagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ManagedBlockchain) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+	req, out := c.TagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest generates a "aws/request.Request" representing the
+// client's request for the UntagResource operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UntagResource for more information on using the UntagResource
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//
+//    // Example sending a request using the UntagResourceRequest method.
+//    req, resp := client.UntagResourceRequest(params)
+//
+//    err := req.Send()
+//    if err == nil { // resp is now filled
+//        fmt.Println(resp)
+//    }
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UntagResource
+func (c *ManagedBlockchain) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
+	op := &request.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/tags/{resourceArn}",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output = &UntagResourceOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UntagResource API operation for Amazon Managed Blockchain.
+//
+// Removes the specified tags from the Amazon Managed Blockchain resource.
+//
+// For more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Managed Blockchain's
+// API operation UntagResource for usage and error information.
+//
+// Returned Error Types:
+//   * InternalServiceErrorException
+//   The request processing has failed because of an unknown error, exception
+//   or failure.
+//
+//   * InvalidRequestException
+//   The action or operation requested is invalid. Verify that the action is typed
+//   correctly.
+//
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
+//
+//   * ResourceNotReadyException
+//   The requested resource exists but is not in a status that can complete the
+//   operation.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UntagResource
+func (c *ManagedBlockchain) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	return out, req.Send()
+}
+
+// UntagResourceWithContext is the same as UntagResource with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UntagResource for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ManagedBlockchain) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+	req, out := c.UntagResourceRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUpdateMember = "UpdateMember"
+
+// UpdateMemberRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateMember operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateMember for more information on using the UpdateMember
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//
+//    // Example sending a request using the UpdateMemberRequest method.
+//    req, resp := client.UpdateMemberRequest(params)
+//
+//    err := req.Send()
+//    if err == nil { // resp is now filled
+//        fmt.Println(resp)
+//    }
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UpdateMember
+func (c *ManagedBlockchain) UpdateMemberRequest(input *UpdateMemberInput) (req *request.Request, output *UpdateMemberOutput) {
+	op := &request.Operation{
+		Name:       opUpdateMember,
+		HTTPMethod: "PATCH",
+		HTTPPath:   "/networks/{networkId}/members/{memberId}",
+	}
+
+	if input == nil {
+		input = &UpdateMemberInput{}
+	}
+
+	output = &UpdateMemberOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdateMember API operation for Amazon Managed Blockchain.
+//
+// Updates a member configuration with new parameters.
+//
+// Applies only to Hyperledger Fabric.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Managed Blockchain's
+// API operation UpdateMember for usage and error information.
+//
+// Returned Error Types:
+//   * InvalidRequestException
+//   The action or operation requested is invalid. Verify that the action is typed
+//   correctly.
+//
+//   * AccessDeniedException
+//   You do not have sufficient access to perform this action.
+//
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
+//
+//   * ThrottlingException
+//   The request or operation could not be performed because a service is throttling
+//   requests. The most common source of throttling errors is launching EC2 instances
+//   such that your service limit for EC2 instances is exceeded. Request a limit
+//   increase or delete unused resources if possible.
+//
+//   * InternalServiceErrorException
+//   The request processing has failed because of an unknown error, exception
+//   or failure.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UpdateMember
+func (c *ManagedBlockchain) UpdateMember(input *UpdateMemberInput) (*UpdateMemberOutput, error) {
+	req, out := c.UpdateMemberRequest(input)
+	return out, req.Send()
+}
+
+// UpdateMemberWithContext is the same as UpdateMember with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateMember for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ManagedBlockchain) UpdateMemberWithContext(ctx aws.Context, input *UpdateMemberInput, opts ...request.Option) (*UpdateMemberOutput, error) {
+	req, out := c.UpdateMemberRequest(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+const opUpdateNode = "UpdateNode"
+
+// UpdateNodeRequest generates a "aws/request.Request" representing the
+// client's request for the UpdateNode operation. The "output" return
+// value will be populated with the request's response once the request completes
+// successfully.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See UpdateNode for more information on using the UpdateNode
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//
+//    // Example sending a request using the UpdateNodeRequest method.
+//    req, resp := client.UpdateNodeRequest(params)
+//
+//    err := req.Send()
+//    if err == nil { // resp is now filled
+//        fmt.Println(resp)
+//    }
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UpdateNode
+func (c *ManagedBlockchain) UpdateNodeRequest(input *UpdateNodeInput) (req *request.Request, output *UpdateNodeOutput) {
+	op := &request.Operation{
+		Name:       opUpdateNode,
+		HTTPMethod: "PATCH",
+		HTTPPath:   "/networks/{networkId}/nodes/{nodeId}",
+	}
+
+	if input == nil {
+		input = &UpdateNodeInput{}
+	}
+
+	output = &UpdateNodeOutput{}
+	req = c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Swap(restjson.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
+	return
+}
+
+// UpdateNode API operation for Amazon Managed Blockchain.
+//
+// Updates a node configuration with new parameters.
+//
+// Applies only to Hyperledger Fabric.
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for Amazon Managed Blockchain's
+// API operation UpdateNode for usage and error information.
+//
+// Returned Error Types:
+//   * InvalidRequestException
+//   The action or operation requested is invalid. Verify that the action is typed
+//   correctly.
+//
+//   * AccessDeniedException
+//   You do not have sufficient access to perform this action.
+//
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
+//
+//   * ThrottlingException
+//   The request or operation could not be performed because a service is throttling
+//   requests. The most common source of throttling errors is launching EC2 instances
+//   such that your service limit for EC2 instances is exceeded. Request a limit
+//   increase or delete unused resources if possible.
+//
+//   * InternalServiceErrorException
+//   The request processing has failed because of an unknown error, exception
+//   or failure.
+//
+// See also, https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UpdateNode
+func (c *ManagedBlockchain) UpdateNode(input *UpdateNodeInput) (*UpdateNodeOutput, error) {
+	req, out := c.UpdateNodeRequest(input)
+	return out, req.Send()
+}
+
+// UpdateNodeWithContext is the same as UpdateNode with the addition of
+// the ability to pass a context and additional request options.
+//
+// See UpdateNode for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *ManagedBlockchain) UpdateNodeWithContext(ctx aws.Context, input *UpdateNodeInput, opts ...request.Option) (*UpdateNodeOutput, error) {
+	req, out := c.UpdateNodeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
 	return out, req.Send()
@@ -2094,6 +2652,8 @@ func (c *ManagedBlockchain) VoteOnProposalRequest(input *VoteOnProposalInput) (r
 // to vote as, specified by VoterMemberId, must be in the same AWS account as
 // the principal that calls the action.
 //
+// Applies only to Hyperledger Fabric.
+//
 // Returns awserr.Error for service API and SDK errors. Use runtime type assertions
 // with awserr.Error's Code and Message methods to get detailed information about
 // the error.
@@ -2101,27 +2661,27 @@ func (c *ManagedBlockchain) VoteOnProposalRequest(input *VoteOnProposalInput) (r
 // See the AWS API reference guide for Amazon Managed Blockchain's
 // API operation VoteOnProposal for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidRequestException "InvalidRequestException"
+// Returned Error Types:
+//   * InvalidRequestException
 //   The action or operation requested is invalid. Verify that the action is typed
 //   correctly.
 //
-//   * ErrCodeIllegalActionException "IllegalActionException"
+//   * IllegalActionException
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have sufficient access to perform this action.
 //
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   A requested resource does not exist on the network. It may have been deleted
-//   or referenced inaccurately.
+//   * ResourceNotFoundException
+//   A requested resource does not exist. It may have been deleted or referenced
+//   inaccurately.
 //
-//   * ErrCodeThrottlingException "ThrottlingException"
+//   * ThrottlingException
 //   The request or operation could not be performed because a service is throttling
 //   requests. The most common source of throttling errors is launching EC2 instances
 //   such that your service limit for EC2 instances is exceeded. Request a limit
 //   increase or delete unused resources if possible.
 //
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
+//   * InternalServiceErrorException
 //   The request processing has failed because of an unknown error, exception
 //   or failure.
 //
@@ -2147,10 +2707,68 @@ func (c *ManagedBlockchain) VoteOnProposalWithContext(ctx aws.Context, input *Vo
 	return out, req.Send()
 }
 
+// You do not have sufficient access to perform this action.
+type AccessDeniedException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation
+func (s AccessDeniedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AccessDeniedException) GoString() string {
+	return s.String()
+}
+
+func newErrorAccessDeniedException(v protocol.ResponseMetadata) error {
+	return &AccessDeniedException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *AccessDeniedException) Code() string {
+	return "AccessDeniedException"
+}
+
+// Message returns the exception's message.
+func (s *AccessDeniedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *AccessDeniedException) OrigErr() error {
+	return nil
+}
+
+func (s *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *AccessDeniedException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *AccessDeniedException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // A policy type that defines the voting rules for the network. The rules decide
 // if a proposal is approved. Approval may be based on criteria such as the
 // percentage of YES votes and the duration of the proposal. The policy applies
 // to all proposals and is specified when the network is created.
+//
+// Applies only to Hyperledger Fabric.
 type ApprovalThresholdPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -2368,6 +2986,17 @@ type CreateNetworkInput struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
+	// Tags to assign to the network. Each tag consists of a key and optional value.
+	//
+	// When specifying tags during creation, you can specify multiple key-value
+	// pairs in a single request, with an overall maximum of 50 added to each resource.
+	//
+	// For more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	Tags map[string]*string `type:"map"`
+
 	// The voting rules used by the network to determine if a proposal is approved.
 	//
 	// VotingPolicy is a required field
@@ -2475,6 +3104,12 @@ func (s *CreateNetworkInput) SetName(v string) *CreateNetworkInput {
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *CreateNetworkInput) SetTags(v map[string]*string) *CreateNetworkInput {
+	s.Tags = v
+	return s
+}
+
 // SetVotingPolicy sets the VotingPolicy field's value.
 func (s *CreateNetworkInput) SetVotingPolicy(v *VotingPolicy) *CreateNetworkInput {
 	s.VotingPolicy = v
@@ -2525,10 +3160,18 @@ type CreateNodeInput struct {
 
 	// The unique identifier of the member that owns this node.
 	//
-	// MemberId is a required field
-	MemberId *string `location:"uri" locationName:"memberId" min:"1" type:"string" required:"true"`
+	// Applies only to Hyperledger Fabric.
+	MemberId *string `min:"1" type:"string"`
 
-	// The unique identifier of the network in which this node runs.
+	// The unique identifier of the network for the node.
+	//
+	// Ethereum public networks have the following NetworkIds:
+	//
+	//    * n-ethereum-mainnet
+	//
+	//    * n-ethereum-rinkeby
+	//
+	//    * n-ethereum-ropsten
 	//
 	// NetworkId is a required field
 	NetworkId *string `location:"uri" locationName:"networkId" min:"1" type:"string" required:"true"`
@@ -2537,6 +3180,17 @@ type CreateNodeInput struct {
 	//
 	// NodeConfiguration is a required field
 	NodeConfiguration *NodeConfiguration `type:"structure" required:"true"`
+
+	// Tags to assign to the node. Each tag consists of a key and optional value.
+	//
+	// When specifying tags during creation, you can specify multiple key-value
+	// pairs in a single request, with an overall maximum of 50 added to each resource.
+	//
+	// For more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	Tags map[string]*string `type:"map"`
 }
 
 // String returns the string representation
@@ -2554,9 +3208,6 @@ func (s *CreateNodeInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "CreateNodeInput"}
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-	if s.MemberId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MemberId"))
 	}
 	if s.MemberId != nil && len(*s.MemberId) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("MemberId", 1))
@@ -2603,6 +3254,12 @@ func (s *CreateNodeInput) SetNetworkId(v string) *CreateNodeInput {
 // SetNodeConfiguration sets the NodeConfiguration field's value.
 func (s *CreateNodeInput) SetNodeConfiguration(v *NodeConfiguration) *CreateNodeInput {
 	s.NodeConfiguration = v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateNodeInput) SetTags(v map[string]*string) *CreateNodeInput {
+	s.Tags = v
 	return s
 }
 
@@ -2661,6 +3318,19 @@ type CreateProposalInput struct {
 	//
 	// NetworkId is a required field
 	NetworkId *string `location:"uri" locationName:"networkId" min:"1" type:"string" required:"true"`
+
+	// Tags to assign to the proposal. Each tag consists of a key and optional value.
+	//
+	// When specifying tags during creation, you can specify multiple key-value
+	// pairs in a single request, with an overall maximum of 50 added to each resource.
+	// If the proposal is for a network invitation, the invitation inherits the
+	// tags added to the proposal.
+	//
+	// For more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	Tags map[string]*string `type:"map"`
 }
 
 // String returns the string representation
@@ -2733,6 +3403,12 @@ func (s *CreateProposalInput) SetMemberId(v string) *CreateProposalInput {
 // SetNetworkId sets the NetworkId field's value.
 func (s *CreateProposalInput) SetNetworkId(v string) *CreateProposalInput {
 	s.NetworkId = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateProposalInput) SetTags(v map[string]*string) *CreateProposalInput {
+	s.Tags = v
 	return s
 }
 
@@ -2836,10 +3512,18 @@ type DeleteNodeInput struct {
 
 	// The unique identifier of the member that owns this node.
 	//
-	// MemberId is a required field
-	MemberId *string `location:"uri" locationName:"memberId" min:"1" type:"string" required:"true"`
+	// Applies only to Hyperledger Fabric and is required for Hyperledger Fabric.
+	MemberId *string `location:"querystring" locationName:"memberId" min:"1" type:"string"`
 
-	// The unique identifier of the network that the node belongs to.
+	// The unique identifier of the network that the node is on.
+	//
+	// Ethereum public networks have the following NetworkIds:
+	//
+	//    * n-ethereum-mainnet
+	//
+	//    * n-ethereum-rinkeby
+	//
+	//    * n-ethereum-ropsten
 	//
 	// NetworkId is a required field
 	NetworkId *string `location:"uri" locationName:"networkId" min:"1" type:"string" required:"true"`
@@ -2863,9 +3547,6 @@ func (s DeleteNodeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNodeInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "DeleteNodeInput"}
-	if s.MemberId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MemberId"))
-	}
 	if s.MemberId != nil && len(*s.MemberId) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("MemberId", 1))
 	}
@@ -3070,10 +3751,10 @@ type GetNodeInput struct {
 
 	// The unique identifier of the member that owns the node.
 	//
-	// MemberId is a required field
-	MemberId *string `location:"uri" locationName:"memberId" min:"1" type:"string" required:"true"`
+	// Applies only to Hyperledger Fabric and is required for Hyperledger Fabric.
+	MemberId *string `location:"querystring" locationName:"memberId" min:"1" type:"string"`
 
-	// The unique identifier of the network to which the node belongs.
+	// The unique identifier of the network that the node is on.
 	//
 	// NetworkId is a required field
 	NetworkId *string `location:"uri" locationName:"networkId" min:"1" type:"string" required:"true"`
@@ -3097,9 +3778,6 @@ func (s GetNodeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetNodeInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "GetNodeInput"}
-	if s.MemberId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MemberId"))
-	}
 	if s.MemberId != nil && len(*s.MemberId) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("MemberId", 1))
 	}
@@ -3244,9 +3922,185 @@ func (s *GetProposalOutput) SetProposal(v *Proposal) *GetProposalOutput {
 	return s
 }
 
+type IllegalActionException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation
+func (s IllegalActionException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s IllegalActionException) GoString() string {
+	return s.String()
+}
+
+func newErrorIllegalActionException(v protocol.ResponseMetadata) error {
+	return &IllegalActionException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *IllegalActionException) Code() string {
+	return "IllegalActionException"
+}
+
+// Message returns the exception's message.
+func (s *IllegalActionException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *IllegalActionException) OrigErr() error {
+	return nil
+}
+
+func (s *IllegalActionException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *IllegalActionException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *IllegalActionException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The request processing has failed because of an unknown error, exception
+// or failure.
+type InternalServiceErrorException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation
+func (s InternalServiceErrorException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InternalServiceErrorException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalServiceErrorException(v protocol.ResponseMetadata) error {
+	return &InternalServiceErrorException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InternalServiceErrorException) Code() string {
+	return "InternalServiceErrorException"
+}
+
+// Message returns the exception's message.
+func (s *InternalServiceErrorException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InternalServiceErrorException) OrigErr() error {
+	return nil
+}
+
+func (s *InternalServiceErrorException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InternalServiceErrorException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InternalServiceErrorException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The action or operation requested is invalid. Verify that the action is typed
+// correctly.
+type InvalidRequestException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation
+func (s InvalidRequestException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InvalidRequestException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidRequestException(v protocol.ResponseMetadata) error {
+	return &InvalidRequestException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *InvalidRequestException) Code() string {
+	return "InvalidRequestException"
+}
+
+// Message returns the exception's message.
+func (s *InvalidRequestException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *InvalidRequestException) OrigErr() error {
+	return nil
+}
+
+func (s *InvalidRequestException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *InvalidRequestException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *InvalidRequestException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
 // An invitation to an AWS account to create a member and join the network.
+//
+// Applies only to Hyperledger Fabric.
 type Invitation struct {
 	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the invitation. For more information about
+	// ARNs and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	Arn *string `min:"1" type:"string"`
 
 	// The date and time that the invitation was created.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -3291,6 +4145,12 @@ func (s Invitation) GoString() string {
 	return s.String()
 }
 
+// SetArn sets the Arn field's value.
+func (s *Invitation) SetArn(v string) *Invitation {
+	s.Arn = &v
+	return s
+}
+
 // SetCreationDate sets the CreationDate field's value.
 func (s *Invitation) SetCreationDate(v time.Time) *Invitation {
 	s.CreationDate = &v
@@ -3323,6 +4183,8 @@ func (s *Invitation) SetStatus(v string) *Invitation {
 
 // An action to invite a specific AWS account to create a member and join the
 // network. The InviteAction is carried out when a Proposal is APPROVED.
+//
+// Applies only to Hyperledger Fabric.
 type InviteAction struct {
 	_ struct{} `type:"structure"`
 
@@ -3581,6 +4443,8 @@ type ListNetworksInput struct {
 
 	// An optional status specifier. If provided, only networks currently in this
 	// status are listed.
+	//
+	// Applies only to Hyperledger Fabric.
 	Status *string `location:"querystring" locationName:"status" type:"string" enum:"NetworkStatus"`
 }
 
@@ -3678,8 +4542,8 @@ type ListNodesInput struct {
 
 	// The unique identifier of the member who owns the nodes to list.
 	//
-	// MemberId is a required field
-	MemberId *string `location:"uri" locationName:"memberId" min:"1" type:"string" required:"true"`
+	// Applies only to Hyperledger Fabric and is required for Hyperledger Fabric.
+	MemberId *string `location:"querystring" locationName:"memberId" min:"1" type:"string"`
 
 	// The unique identifier of the network for which to list nodes.
 	//
@@ -3709,9 +4573,6 @@ func (s *ListNodesInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "ListNodesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.MemberId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MemberId"))
 	}
 	if s.MemberId != nil && len(*s.MemberId) < 1 {
 		invalidParams.Add(request.NewErrParamMinLen("MemberId", 1))
@@ -3877,7 +4738,7 @@ type ListProposalVotesOutput struct {
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string `type:"string"`
 
-	// The listing of votes.
+	// The list of votes.
 	ProposalVotes []*VoteSummary `type:"list"`
 }
 
@@ -3997,9 +4858,130 @@ func (s *ListProposalsOutput) SetProposals(v []*ProposalSummary) *ListProposalsO
 	return s
 }
 
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource. For more information about
+	// ARNs and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resourceArn" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *ListTagsForResourceInput) SetResourceArn(v string) *ListTagsForResourceInput {
+	s.ResourceArn = &v
+	return s
+}
+
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The tags assigned to the resource.
+	Tags map[string]*string `type:"map"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SetTags sets the Tags field's value.
+func (s *ListTagsForResourceOutput) SetTags(v map[string]*string) *ListTagsForResourceOutput {
+	s.Tags = v
+	return s
+}
+
+// A configuration for logging events.
+type LogConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether logging is enabled.
+	Enabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s LogConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LogConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *LogConfiguration) SetEnabled(v bool) *LogConfiguration {
+	s.Enabled = &v
+	return s
+}
+
+// A collection of log configurations.
+type LogConfigurations struct {
+	_ struct{} `type:"structure"`
+
+	// Parameters for publishing logs to Amazon CloudWatch Logs.
+	Cloudwatch *LogConfiguration `type:"structure"`
+}
+
+// String returns the string representation
+func (s LogConfigurations) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LogConfigurations) GoString() string {
+	return s.String()
+}
+
+// SetCloudwatch sets the Cloudwatch field's value.
+func (s *LogConfigurations) SetCloudwatch(v *LogConfiguration) *LogConfigurations {
+	s.Cloudwatch = v
+	return s
+}
+
 // Member configuration properties.
+//
+// Applies only to Hyperledger Fabric.
 type Member struct {
 	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the member. For more information about
+	// ARNs and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	Arn *string `min:"1" type:"string"`
 
 	// The date and time that the member was created.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -4013,6 +4995,9 @@ type Member struct {
 
 	// The unique identifier of the member.
 	Id *string `min:"1" type:"string"`
+
+	// Configuration properties for logging events associated with a member.
+	LogPublishingConfiguration *MemberLogPublishingConfiguration `type:"structure"`
 
 	// The name of the member.
 	Name *string `min:"1" type:"string"`
@@ -4039,6 +5024,11 @@ type Member struct {
 	//    member deleted it, or the member is being deleted as the result of an
 	//    APPROVED PROPOSAL to remove the member.
 	Status *string `type:"string" enum:"MemberStatus"`
+
+	// Tags assigned to the member. Tags consist of a key and optional value. For
+	// more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	Tags map[string]*string `type:"map"`
 }
 
 // String returns the string representation
@@ -4049,6 +5039,12 @@ func (s Member) String() string {
 // GoString returns the string representation
 func (s Member) GoString() string {
 	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *Member) SetArn(v string) *Member {
+	s.Arn = &v
+	return s
 }
 
 // SetCreationDate sets the CreationDate field's value.
@@ -4075,6 +5071,12 @@ func (s *Member) SetId(v string) *Member {
 	return s
 }
 
+// SetLogPublishingConfiguration sets the LogPublishingConfiguration field's value.
+func (s *Member) SetLogPublishingConfiguration(v *MemberLogPublishingConfiguration) *Member {
+	s.LogPublishingConfiguration = v
+	return s
+}
+
 // SetName sets the Name field's value.
 func (s *Member) SetName(v string) *Member {
 	s.Name = &v
@@ -4093,7 +5095,15 @@ func (s *Member) SetStatus(v string) *Member {
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *Member) SetTags(v map[string]*string) *Member {
+	s.Tags = v
+	return s
+}
+
 // Configuration properties of the member.
+//
+// Applies only to Hyperledger Fabric.
 type MemberConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -4105,10 +5115,22 @@ type MemberConfiguration struct {
 	// FrameworkConfiguration is a required field
 	FrameworkConfiguration *MemberFrameworkConfiguration `type:"structure" required:"true"`
 
+	// Configuration properties for logging events associated with a member of a
+	// Managed Blockchain network.
+	LogPublishingConfiguration *MemberLogPublishingConfiguration `type:"structure"`
+
 	// The name of the member.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
+
+	// Tags assigned to the member. Tags consist of a key and optional value. For
+	// more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	//
+	// When specifying tags during creation, you can specify multiple key-value
+	// pairs in a single request, with an overall maximum of 50 added to each resource.
+	Tags map[string]*string `type:"map"`
 }
 
 // String returns the string representation
@@ -4157,9 +5179,21 @@ func (s *MemberConfiguration) SetFrameworkConfiguration(v *MemberFrameworkConfig
 	return s
 }
 
+// SetLogPublishingConfiguration sets the LogPublishingConfiguration field's value.
+func (s *MemberConfiguration) SetLogPublishingConfiguration(v *MemberLogPublishingConfiguration) *MemberConfiguration {
+	s.LogPublishingConfiguration = v
+	return s
+}
+
 // SetName sets the Name field's value.
 func (s *MemberConfiguration) SetName(v string) *MemberConfiguration {
 	s.Name = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *MemberConfiguration) SetTags(v map[string]*string) *MemberConfiguration {
+	s.Tags = v
 	return s
 }
 
@@ -4205,8 +5239,8 @@ type MemberFabricConfiguration struct {
 	// The password for the member's initial administrative user. The AdminPassword
 	// must be at least eight characters long and no more than 32 characters. It
 	// must contain at least one uppercase letter, one lowercase letter, and one
-	// digit. It cannot have a single quote(‘), double quote(“), forward slash(/),
-	// backward slash(\), @, or a space.
+	// digit. It cannot have a single quotation mark (‘), a double quotation marks
+	// (“), a forward slash(/), a backward slash(\), @, or a space.
 	//
 	// AdminPassword is a required field
 	AdminPassword *string `min:"8" type:"string" required:"true" sensitive:"true"`
@@ -4258,6 +5292,33 @@ func (s *MemberFabricConfiguration) SetAdminPassword(v string) *MemberFabricConf
 // SetAdminUsername sets the AdminUsername field's value.
 func (s *MemberFabricConfiguration) SetAdminUsername(v string) *MemberFabricConfiguration {
 	s.AdminUsername = &v
+	return s
+}
+
+// Configuration properties for logging events associated with a member of a
+// Managed Blockchain network using the Hyperledger Fabric framework.
+type MemberFabricLogPublishingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Configuration properties for logging events associated with a member's Certificate
+	// Authority (CA). CA logs help you determine when a member in your account
+	// joins the network, or when new peers register with a member CA.
+	CaLogs *LogConfigurations `type:"structure"`
+}
+
+// String returns the string representation
+func (s MemberFabricLogPublishingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MemberFabricLogPublishingConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetCaLogs sets the CaLogs field's value.
+func (s *MemberFabricLogPublishingConfiguration) SetCaLogs(v *LogConfigurations) *MemberFabricLogPublishingConfiguration {
+	s.CaLogs = v
 	return s
 }
 
@@ -4328,9 +5389,42 @@ func (s *MemberFrameworkConfiguration) SetFabric(v *MemberFabricConfiguration) *
 	return s
 }
 
+// Configuration properties for logging events associated with a member of a
+// Managed Blockchain network.
+type MemberLogPublishingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Configuration properties for logging events associated with a member of a
+	// Managed Blockchain network using the Hyperledger Fabric framework.
+	Fabric *MemberFabricLogPublishingConfiguration `type:"structure"`
+}
+
+// String returns the string representation
+func (s MemberLogPublishingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MemberLogPublishingConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetFabric sets the Fabric field's value.
+func (s *MemberLogPublishingConfiguration) SetFabric(v *MemberFabricLogPublishingConfiguration) *MemberLogPublishingConfiguration {
+	s.Fabric = v
+	return s
+}
+
 // A summary of configuration properties for a member.
+//
+// Applies only to Hyperledger Fabric.
 type MemberSummary struct {
 	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the member. For more information about
+	// ARNs and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	Arn *string `min:"1" type:"string"`
 
 	// The date and time that the member was created.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -4379,6 +5473,12 @@ func (s MemberSummary) GoString() string {
 	return s.String()
 }
 
+// SetArn sets the Arn field's value.
+func (s *MemberSummary) SetArn(v string) *MemberSummary {
+	s.Arn = &v
+	return s
+}
+
 // SetCreationDate sets the CreationDate field's value.
 func (s *MemberSummary) SetCreationDate(v time.Time) *MemberSummary {
 	s.CreationDate = &v
@@ -4419,6 +5519,11 @@ func (s *MemberSummary) SetStatus(v string) *MemberSummary {
 type Network struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the network. For more information about
+	// ARNs and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	Arn *string `min:"1" type:"string"`
+
 	// The date and time that the network was created.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
@@ -4443,6 +5548,14 @@ type Network struct {
 	// The current status of the network.
 	Status *string `type:"string" enum:"NetworkStatus"`
 
+	// Tags assigned to the network. Each tag consists of a key and optional value.
+	//
+	// For more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	Tags map[string]*string `type:"map"`
+
 	// The voting rules for the network to decide if a proposal is accepted.
 	VotingPolicy *VotingPolicy `type:"structure"`
 
@@ -4460,6 +5573,12 @@ func (s Network) String() string {
 // GoString returns the string representation
 func (s Network) GoString() string {
 	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *Network) SetArn(v string) *Network {
+	s.Arn = &v
+	return s
 }
 
 // SetCreationDate sets the CreationDate field's value.
@@ -4510,6 +5629,12 @@ func (s *Network) SetStatus(v string) *Network {
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *Network) SetTags(v map[string]*string) *Network {
+	s.Tags = v
+	return s
+}
+
 // SetVotingPolicy sets the VotingPolicy field's value.
 func (s *Network) SetVotingPolicy(v *VotingPolicy) *Network {
 	s.VotingPolicy = v
@@ -4522,12 +5647,44 @@ func (s *Network) SetVpcEndpointServiceName(v string) *Network {
 	return s
 }
 
+// Attributes of Ethereum for a network. Ethereum on Managed Blockchain is in
+// preview release and is subject to change.
+type NetworkEthereumAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// The Ethereum CHAIN_ID associated with the Ethereum network. Chain IDs are
+	// as follows:
+	//
+	//    * mainnet = 1
+	//
+	//    * rinkeby = 4
+	//
+	//    * ropsten = 3
+	ChainId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s NetworkEthereumAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NetworkEthereumAttributes) GoString() string {
+	return s.String()
+}
+
+// SetChainId sets the ChainId field's value.
+func (s *NetworkEthereumAttributes) SetChainId(v string) *NetworkEthereumAttributes {
+	s.ChainId = &v
+	return s
+}
+
 // Attributes of Hyperledger Fabric for a network.
 type NetworkFabricAttributes struct {
 	_ struct{} `type:"structure"`
 
 	// The edition of Amazon Managed Blockchain that Hyperledger Fabric uses. For
-	// more information, see Amazon Managed Blockchain Pricing (https://aws.amazon.com/managed-blockchain/pricing/).
+	// more information, see Amazon Managed Blockchain Pricing (http://aws.amazon.com/managed-blockchain/pricing/).
 	Edition *string `type:"string" enum:"Edition"`
 
 	// The endpoint of the ordering service for the network.
@@ -4561,7 +5718,7 @@ type NetworkFabricConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// The edition of Amazon Managed Blockchain that the network uses. For more
-	// information, see Amazon Managed Blockchain Pricing (https://aws.amazon.com/managed-blockchain/pricing/).
+	// information, see Amazon Managed Blockchain Pricing (http://aws.amazon.com/managed-blockchain/pricing/).
 	//
 	// Edition is a required field
 	Edition *string `type:"string" required:"true" enum:"Edition"`
@@ -4601,6 +5758,11 @@ func (s *NetworkFabricConfiguration) SetEdition(v string) *NetworkFabricConfigur
 type NetworkFrameworkAttributes struct {
 	_ struct{} `type:"structure"`
 
+	// Attributes of an Ethereum network for Managed Blockchain resources participating
+	// in an Ethereum network. Ethereum on Managed Blockchain is in preview release
+	// and is subject to change.
+	Ethereum *NetworkEthereumAttributes `type:"structure"`
+
 	// Attributes of Hyperledger Fabric for a Managed Blockchain network that uses
 	// Hyperledger Fabric.
 	Fabric *NetworkFabricAttributes `type:"structure"`
@@ -4614,6 +5776,12 @@ func (s NetworkFrameworkAttributes) String() string {
 // GoString returns the string representation
 func (s NetworkFrameworkAttributes) GoString() string {
 	return s.String()
+}
+
+// SetEthereum sets the Ethereum field's value.
+func (s *NetworkFrameworkAttributes) SetEthereum(v *NetworkEthereumAttributes) *NetworkFrameworkAttributes {
+	s.Ethereum = v
+	return s
 }
 
 // SetFabric sets the Fabric field's value.
@@ -4667,6 +5835,11 @@ func (s *NetworkFrameworkConfiguration) SetFabric(v *NetworkFabricConfiguration)
 type NetworkSummary struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the network. For more information about
+	// ARNs and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	Arn *string `min:"1" type:"string"`
+
 	// The date and time that the network was created.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
@@ -4697,6 +5870,12 @@ func (s NetworkSummary) String() string {
 // GoString returns the string representation
 func (s NetworkSummary) GoString() string {
 	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *NetworkSummary) SetArn(v string) *NetworkSummary {
+	s.Arn = &v
+	return s
 }
 
 // SetCreationDate sets the CreationDate field's value.
@@ -4741,11 +5920,17 @@ func (s *NetworkSummary) SetStatus(v string) *NetworkSummary {
 	return s
 }
 
-// Configuration properties of a peer node.
+// Configuration properties of a node.
 type Node struct {
 	_ struct{} `type:"structure"`
 
-	// The Availability Zone in which the node exists.
+	// The Amazon Resource Name (ARN) of the node. For more information about ARNs
+	// and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	Arn *string `min:"1" type:"string"`
+
+	// The Availability Zone in which the node exists. Required for Ethereum nodes.
+	// Ethereum on Managed Blockchain is in preview release and is subject to change.
 	AvailabilityZone *string `type:"string"`
 
 	// The date and time that the node was created.
@@ -4760,14 +5945,33 @@ type Node struct {
 	// The instance type of the node.
 	InstanceType *string `type:"string"`
 
+	// Configuration properties for logging events associated with a peer node on
+	// a Hyperledger Fabric network on Managed Blockchain.
+	LogPublishingConfiguration *NodeLogPublishingConfiguration `type:"structure"`
+
 	// The unique identifier of the member to which the node belongs.
+	//
+	// Applies only to Hyperledger Fabric.
 	MemberId *string `min:"1" type:"string"`
 
-	// The unique identifier of the network that the node is in.
+	// The unique identifier of the network that the node is on.
 	NetworkId *string `min:"1" type:"string"`
+
+	// The state database that the node uses. Values are LevelDB or CouchDB.
+	//
+	// Applies only to Hyperledger Fabric.
+	StateDB *string `type:"string" enum:"StateDBType"`
 
 	// The status of the node.
 	Status *string `type:"string" enum:"NodeStatus"`
+
+	// Tags assigned to the node. Each tag consists of a key and optional value.
+	//
+	// For more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	Tags map[string]*string `type:"map"`
 }
 
 // String returns the string representation
@@ -4778,6 +5982,12 @@ func (s Node) String() string {
 // GoString returns the string representation
 func (s Node) GoString() string {
 	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *Node) SetArn(v string) *Node {
+	s.Arn = &v
+	return s
 }
 
 // SetAvailabilityZone sets the AvailabilityZone field's value.
@@ -4810,6 +6020,12 @@ func (s *Node) SetInstanceType(v string) *Node {
 	return s
 }
 
+// SetLogPublishingConfiguration sets the LogPublishingConfiguration field's value.
+func (s *Node) SetLogPublishingConfiguration(v *NodeLogPublishingConfiguration) *Node {
+	s.LogPublishingConfiguration = v
+	return s
+}
+
 // SetMemberId sets the MemberId field's value.
 func (s *Node) SetMemberId(v string) *Node {
 	s.MemberId = &v
@@ -4822,25 +6038,47 @@ func (s *Node) SetNetworkId(v string) *Node {
 	return s
 }
 
+// SetStateDB sets the StateDB field's value.
+func (s *Node) SetStateDB(v string) *Node {
+	s.StateDB = &v
+	return s
+}
+
 // SetStatus sets the Status field's value.
 func (s *Node) SetStatus(v string) *Node {
 	s.Status = &v
 	return s
 }
 
-// Configuration properties of a peer node.
+// SetTags sets the Tags field's value.
+func (s *Node) SetTags(v map[string]*string) *Node {
+	s.Tags = v
+	return s
+}
+
+// Configuration properties of a node.
 type NodeConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The Availability Zone in which the node exists.
-	//
-	// AvailabilityZone is a required field
-	AvailabilityZone *string `type:"string" required:"true"`
+	// The Availability Zone in which the node exists. Required for Ethereum nodes.
+	// Ethereum on Managed Blockchain is in preview release and is subject to change.
+	AvailabilityZone *string `type:"string"`
 
 	// The Amazon Managed Blockchain instance type for the node.
 	//
 	// InstanceType is a required field
 	InstanceType *string `type:"string" required:"true"`
+
+	// Configuration properties for logging events associated with a peer node on
+	// a Hyperledger Fabric network on Managed Blockchain.
+	LogPublishingConfiguration *NodeLogPublishingConfiguration `type:"structure"`
+
+	// The state database that the node uses. Values are LevelDB or CouchDB. When
+	// using an Amazon Managed Blockchain network with Hyperledger Fabric version
+	// 1.4 or later, the default is CouchDB.
+	//
+	// Applies only to Hyperledger Fabric.
+	StateDB *string `type:"string" enum:"StateDBType"`
 }
 
 // String returns the string representation
@@ -4856,9 +6094,6 @@ func (s NodeConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NodeConfiguration) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "NodeConfiguration"}
-	if s.AvailabilityZone == nil {
-		invalidParams.Add(request.NewErrParamRequired("AvailabilityZone"))
-	}
 	if s.InstanceType == nil {
 		invalidParams.Add(request.NewErrParamRequired("InstanceType"))
 	}
@@ -4881,8 +6116,60 @@ func (s *NodeConfiguration) SetInstanceType(v string) *NodeConfiguration {
 	return s
 }
 
-// Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain
-// network that uses Hyperledger Fabric.
+// SetLogPublishingConfiguration sets the LogPublishingConfiguration field's value.
+func (s *NodeConfiguration) SetLogPublishingConfiguration(v *NodeLogPublishingConfiguration) *NodeConfiguration {
+	s.LogPublishingConfiguration = v
+	return s
+}
+
+// SetStateDB sets the StateDB field's value.
+func (s *NodeConfiguration) SetStateDB(v string) *NodeConfiguration {
+	s.StateDB = &v
+	return s
+}
+
+// Attributes of an Ethereum node. Ethereum on Managed Blockchain is in preview
+// release and is subject to change.
+type NodeEthereumAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC
+	// methods over HTTP connections from a client. Use this endpoint in client
+	// code for smart contracts when using an HTTP connection. Connections to this
+	// endpoint are authenticated using Signature Version 4 (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+	HttpEndpoint *string `type:"string"`
+
+	// The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC
+	// methods over WebSockets connections from a client. Use this endpoint in client
+	// code for smart contracts when using a WebSockets connection. Connections
+	// to this endpoint are authenticated using Signature Version 4 (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+	WebSocketEndpoint *string `type:"string"`
+}
+
+// String returns the string representation
+func (s NodeEthereumAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NodeEthereumAttributes) GoString() string {
+	return s.String()
+}
+
+// SetHttpEndpoint sets the HttpEndpoint field's value.
+func (s *NodeEthereumAttributes) SetHttpEndpoint(v string) *NodeEthereumAttributes {
+	s.HttpEndpoint = &v
+	return s
+}
+
+// SetWebSocketEndpoint sets the WebSocketEndpoint field's value.
+func (s *NodeEthereumAttributes) SetWebSocketEndpoint(v string) *NodeEthereumAttributes {
+	s.WebSocketEndpoint = &v
+	return s
+}
+
+// Attributes of Hyperledger Fabric for a peer node on a Hyperledger Fabric
+// network on Managed Blockchain.
 type NodeFabricAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -4916,10 +6203,56 @@ func (s *NodeFabricAttributes) SetPeerEventEndpoint(v string) *NodeFabricAttribu
 	return s
 }
 
-// Attributes relevant to a peer node on a Managed Blockchain network for the
-// blockchain framework that the network uses.
+// Configuration properties for logging events associated with a peer node owned
+// by a member in a Managed Blockchain network.
+type NodeFabricLogPublishingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Configuration properties for logging events associated with chaincode execution
+	// on a peer node. Chaincode logs contain the results of instantiating, invoking,
+	// and querying the chaincode. A peer can run multiple instances of chaincode.
+	// When enabled, a log stream is created for all chaincodes, with an individual
+	// log stream for each chaincode.
+	ChaincodeLogs *LogConfigurations `type:"structure"`
+
+	// Configuration properties for a peer node log. Peer node logs contain messages
+	// generated when your client submits transaction proposals to peer nodes, requests
+	// to join channels, enrolls an admin peer, and lists the chaincode instances
+	// on a peer node.
+	PeerLogs *LogConfigurations `type:"structure"`
+}
+
+// String returns the string representation
+func (s NodeFabricLogPublishingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NodeFabricLogPublishingConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetChaincodeLogs sets the ChaincodeLogs field's value.
+func (s *NodeFabricLogPublishingConfiguration) SetChaincodeLogs(v *LogConfigurations) *NodeFabricLogPublishingConfiguration {
+	s.ChaincodeLogs = v
+	return s
+}
+
+// SetPeerLogs sets the PeerLogs field's value.
+func (s *NodeFabricLogPublishingConfiguration) SetPeerLogs(v *LogConfigurations) *NodeFabricLogPublishingConfiguration {
+	s.PeerLogs = v
+	return s
+}
+
+// Attributes relevant to a node on a Managed Blockchain network for the blockchain
+// framework that the network uses.
 type NodeFrameworkAttributes struct {
 	_ struct{} `type:"structure"`
+
+	// Attributes of Ethereum for a node on a Managed Blockchain network that uses
+	// Ethereum. Ethereum on Managed Blockchain is in preview release and is subject
+	// to change.
+	Ethereum *NodeEthereumAttributes `type:"structure"`
 
 	// Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain
 	// network that uses Hyperledger Fabric.
@@ -4936,15 +6269,53 @@ func (s NodeFrameworkAttributes) GoString() string {
 	return s.String()
 }
 
+// SetEthereum sets the Ethereum field's value.
+func (s *NodeFrameworkAttributes) SetEthereum(v *NodeEthereumAttributes) *NodeFrameworkAttributes {
+	s.Ethereum = v
+	return s
+}
+
 // SetFabric sets the Fabric field's value.
 func (s *NodeFrameworkAttributes) SetFabric(v *NodeFabricAttributes) *NodeFrameworkAttributes {
 	s.Fabric = v
 	return s
 }
 
-// A summary of configuration properties for a peer node.
+// Configuration properties for logging events associated with a peer node on
+// a Hyperledger Fabric network on Managed Blockchain.
+type NodeLogPublishingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Configuration properties for logging events associated with a node that is
+	// owned by a member of a Managed Blockchain network using the Hyperledger Fabric
+	// framework.
+	Fabric *NodeFabricLogPublishingConfiguration `type:"structure"`
+}
+
+// String returns the string representation
+func (s NodeLogPublishingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NodeLogPublishingConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetFabric sets the Fabric field's value.
+func (s *NodeLogPublishingConfiguration) SetFabric(v *NodeFabricLogPublishingConfiguration) *NodeLogPublishingConfiguration {
+	s.Fabric = v
+	return s
+}
+
+// A summary of configuration properties for a node.
 type NodeSummary struct {
 	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the node. For more information about ARNs
+	// and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	Arn *string `min:"1" type:"string"`
 
 	// The Availability Zone in which the node exists.
 	AvailabilityZone *string `type:"string"`
@@ -4970,6 +6341,12 @@ func (s NodeSummary) String() string {
 // GoString returns the string representation
 func (s NodeSummary) GoString() string {
 	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *NodeSummary) SetArn(v string) *NodeSummary {
+	s.Arn = &v
+	return s
 }
 
 // SetAvailabilityZone sets the AvailabilityZone field's value.
@@ -5003,11 +6380,18 @@ func (s *NodeSummary) SetStatus(v string) *NodeSummary {
 }
 
 // Properties of a proposal on a Managed Blockchain network.
+//
+// Applies only to Hyperledger Fabric.
 type Proposal struct {
 	_ struct{} `type:"structure"`
 
 	// The actions to perform on the network if the proposal is APPROVED.
 	Actions *ProposalActions `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the proposal. For more information about
+	// ARNs and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	Arn *string `min:"1" type:"string"`
 
 	// The date and time that the proposal was created.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -5058,8 +6442,18 @@ type Proposal struct {
 	//    are not carried out.
 	//
 	//    * ACTION_FAILED - One or more of the specified ProposalActions in a proposal
-	//    that was approved could not be completed because of an error.
+	//    that was approved could not be completed because of an error. The ACTION_FAILED
+	//    status occurs even if only one ProposalAction fails and other actions
+	//    are successful.
 	Status *string `type:"string" enum:"ProposalStatus"`
+
+	// Tags assigned to the proposal. Each tag consists of a key and optional value.
+	//
+	// For more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	Tags map[string]*string `type:"map"`
 
 	// The current total of YES votes cast on the proposal by members.
 	YesVoteCount *int64 `type:"integer"`
@@ -5078,6 +6472,12 @@ func (s Proposal) GoString() string {
 // SetActions sets the Actions field's value.
 func (s *Proposal) SetActions(v *ProposalActions) *Proposal {
 	s.Actions = v
+	return s
+}
+
+// SetArn sets the Arn field's value.
+func (s *Proposal) SetArn(v string) *Proposal {
+	s.Arn = &v
 	return s
 }
 
@@ -5141,6 +6541,12 @@ func (s *Proposal) SetStatus(v string) *Proposal {
 	return s
 }
 
+// SetTags sets the Tags field's value.
+func (s *Proposal) SetTags(v map[string]*string) *Proposal {
+	s.Tags = v
+	return s
+}
+
 // SetYesVoteCount sets the YesVoteCount field's value.
 func (s *Proposal) SetYesVoteCount(v int64) *Proposal {
 	s.YesVoteCount = &v
@@ -5148,6 +6554,8 @@ func (s *Proposal) SetYesVoteCount(v int64) *Proposal {
 }
 
 // The actions to carry out if a proposal is APPROVED.
+//
+// Applies only to Hyperledger Fabric.
 type ProposalActions struct {
 	_ struct{} `type:"structure"`
 
@@ -5214,8 +6622,15 @@ func (s *ProposalActions) SetRemovals(v []*RemoveAction) *ProposalActions {
 }
 
 // Properties of a proposal.
+//
+// Applies only to Hyperledger Fabric.
 type ProposalSummary struct {
 	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the proposal. For more information about
+	// ARNs and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	Arn *string `min:"1" type:"string"`
 
 	// The date and time that the proposal was created.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -5268,6 +6683,12 @@ func (s ProposalSummary) String() string {
 // GoString returns the string representation
 func (s ProposalSummary) GoString() string {
 	return s.String()
+}
+
+// SetArn sets the Arn field's value.
+func (s *ProposalSummary) SetArn(v string) *ProposalSummary {
+	s.Arn = &v
+	return s
 }
 
 // SetCreationDate sets the CreationDate field's value.
@@ -5370,6 +6791,8 @@ func (s RejectInvitationOutput) GoString() string {
 // An action to remove a member from a Managed Blockchain network as the result
 // of a removal proposal that is APPROVED. The member and all associated resources
 // are deleted from the network.
+//
+// Applies only to Hyperledger Fabric.
 type RemoveAction struct {
 	_ struct{} `type:"structure"`
 
@@ -5409,6 +6832,675 @@ func (s *RemoveAction) Validate() error {
 func (s *RemoveAction) SetMemberId(v string) *RemoveAction {
 	s.MemberId = &v
 	return s
+}
+
+// A resource request is issued for a resource that already exists.
+type ResourceAlreadyExistsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceAlreadyExistsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceAlreadyExistsException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceAlreadyExistsException(v protocol.ResponseMetadata) error {
+	return &ResourceAlreadyExistsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceAlreadyExistsException) Code() string {
+	return "ResourceAlreadyExistsException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceAlreadyExistsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceAlreadyExistsException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceAlreadyExistsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceAlreadyExistsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The maximum number of resources of that type already exist. Ensure the resources
+// requested are within the boundaries of the service edition and your account
+// limits.
+type ResourceLimitExceededException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceLimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceLimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceLimitExceededException(v protocol.ResponseMetadata) error {
+	return &ResourceLimitExceededException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceLimitExceededException) Code() string {
+	return "ResourceLimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceLimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceLimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceLimitExceededException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceLimitExceededException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// A requested resource does not exist. It may have been deleted or referenced
+// inaccurately.
+type ResourceNotFoundException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+
+	// A requested resource does not exist. It may have been deleted or referenced
+	// inaccurately.
+	ResourceName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceNotFoundException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceNotFoundException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotFoundException(v protocol.ResponseMetadata) error {
+	return &ResourceNotFoundException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotFoundException) Code() string {
+	return "ResourceNotFoundException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotFoundException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotFoundException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotFoundException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotFoundException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+// The requested resource exists but is not in a status that can complete the
+// operation.
+type ResourceNotReadyException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceNotReadyException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceNotReadyException) GoString() string {
+	return s.String()
+}
+
+func newErrorResourceNotReadyException(v protocol.ResponseMetadata) error {
+	return &ResourceNotReadyException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ResourceNotReadyException) Code() string {
+	return "ResourceNotReadyException"
+}
+
+// Message returns the exception's message.
+func (s *ResourceNotReadyException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ResourceNotReadyException) OrigErr() error {
+	return nil
+}
+
+func (s *ResourceNotReadyException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ResourceNotReadyException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ResourceNotReadyException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource. For more information about
+	// ARNs and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resourceArn" min:"1" type:"string" required:"true"`
+
+	// The tags to assign to the specified resource. Tag values can be empty, for
+	// example, "MyTagKey" : "". You can specify multiple key-value pairs in a single
+	// request, with an overall maximum of 50 added to each resource.
+	//
+	// Tags is a required field
+	Tags map[string]*string `type:"map" required:"true"`
+}
+
+// String returns the string representation
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+	if s.Tags == nil {
+		invalidParams.Add(request.NewErrParamRequired("Tags"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *TagResourceInput) SetResourceArn(v string) *TagResourceInput {
+	s.ResourceArn = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *TagResourceInput) SetTags(v map[string]*string) *TagResourceInput {
+	s.Tags = v
+	return s
+}
+
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// The request or operation could not be performed because a service is throttling
+// requests. The most common source of throttling errors is launching EC2 instances
+// such that your service limit for EC2 instances is exceeded. Request a limit
+// increase or delete unused resources if possible.
+type ThrottlingException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation
+func (s ThrottlingException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ThrottlingException) GoString() string {
+	return s.String()
+}
+
+func newErrorThrottlingException(v protocol.ResponseMetadata) error {
+	return &ThrottlingException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *ThrottlingException) Code() string {
+	return "ThrottlingException"
+}
+
+// Message returns the exception's message.
+func (s *ThrottlingException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *ThrottlingException) OrigErr() error {
+	return nil
+}
+
+func (s *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", s.Code(), s.Message())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *ThrottlingException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *ThrottlingException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type TooManyTagsException struct {
+	_            struct{}                  `type:"structure"`
+	RespMetadata protocol.ResponseMetadata `json:"-" xml:"-"`
+
+	Message_ *string `locationName:"Message" type:"string"`
+
+	ResourceName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s TooManyTagsException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TooManyTagsException) GoString() string {
+	return s.String()
+}
+
+func newErrorTooManyTagsException(v protocol.ResponseMetadata) error {
+	return &TooManyTagsException{
+		RespMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s *TooManyTagsException) Code() string {
+	return "TooManyTagsException"
+}
+
+// Message returns the exception's message.
+func (s *TooManyTagsException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s *TooManyTagsException) OrigErr() error {
+	return nil
+}
+
+func (s *TooManyTagsException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s *TooManyTagsException) StatusCode() int {
+	return s.RespMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s *TooManyTagsException) RequestID() string {
+	return s.RespMetadata.RequestID
+}
+
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource. For more information about
+	// ARNs and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resourceArn" min:"1" type:"string" required:"true"`
+
+	// The tag keys.
+	//
+	// TagKeys is a required field
+	TagKeys []*string `location:"querystring" locationName:"tagKeys" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	if s.ResourceArn == nil {
+		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+	}
+	if s.TagKeys == nil {
+		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *UntagResourceInput) SetResourceArn(v string) *UntagResourceInput {
+	s.ResourceArn = &v
+	return s
+}
+
+// SetTagKeys sets the TagKeys field's value.
+func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
+	s.TagKeys = v
+	return s
+}
+
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+type UpdateMemberInput struct {
+	_ struct{} `type:"structure"`
+
+	// Configuration properties for publishing to Amazon CloudWatch Logs.
+	LogPublishingConfiguration *MemberLogPublishingConfiguration `type:"structure"`
+
+	// The unique identifier of the member.
+	//
+	// MemberId is a required field
+	MemberId *string `location:"uri" locationName:"memberId" min:"1" type:"string" required:"true"`
+
+	// The unique identifier of the Managed Blockchain network to which the member
+	// belongs.
+	//
+	// NetworkId is a required field
+	NetworkId *string `location:"uri" locationName:"networkId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateMemberInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateMemberInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateMemberInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateMemberInput"}
+	if s.MemberId == nil {
+		invalidParams.Add(request.NewErrParamRequired("MemberId"))
+	}
+	if s.MemberId != nil && len(*s.MemberId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("MemberId", 1))
+	}
+	if s.NetworkId == nil {
+		invalidParams.Add(request.NewErrParamRequired("NetworkId"))
+	}
+	if s.NetworkId != nil && len(*s.NetworkId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NetworkId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLogPublishingConfiguration sets the LogPublishingConfiguration field's value.
+func (s *UpdateMemberInput) SetLogPublishingConfiguration(v *MemberLogPublishingConfiguration) *UpdateMemberInput {
+	s.LogPublishingConfiguration = v
+	return s
+}
+
+// SetMemberId sets the MemberId field's value.
+func (s *UpdateMemberInput) SetMemberId(v string) *UpdateMemberInput {
+	s.MemberId = &v
+	return s
+}
+
+// SetNetworkId sets the NetworkId field's value.
+func (s *UpdateMemberInput) SetNetworkId(v string) *UpdateMemberInput {
+	s.NetworkId = &v
+	return s
+}
+
+type UpdateMemberOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateMemberOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateMemberOutput) GoString() string {
+	return s.String()
+}
+
+type UpdateNodeInput struct {
+	_ struct{} `type:"structure"`
+
+	// Configuration properties for publishing to Amazon CloudWatch Logs.
+	LogPublishingConfiguration *NodeLogPublishingConfiguration `type:"structure"`
+
+	// The unique identifier of the member that owns the node.
+	//
+	// Applies only to Hyperledger Fabric.
+	MemberId *string `min:"1" type:"string"`
+
+	// The unique identifier of the network that the node is on.
+	//
+	// NetworkId is a required field
+	NetworkId *string `location:"uri" locationName:"networkId" min:"1" type:"string" required:"true"`
+
+	// The unique identifier of the node.
+	//
+	// NodeId is a required field
+	NodeId *string `location:"uri" locationName:"nodeId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateNodeInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateNodeInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateNodeInput) Validate() error {
+	invalidParams := request.ErrInvalidParams{Context: "UpdateNodeInput"}
+	if s.MemberId != nil && len(*s.MemberId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("MemberId", 1))
+	}
+	if s.NetworkId == nil {
+		invalidParams.Add(request.NewErrParamRequired("NetworkId"))
+	}
+	if s.NetworkId != nil && len(*s.NetworkId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NetworkId", 1))
+	}
+	if s.NodeId == nil {
+		invalidParams.Add(request.NewErrParamRequired("NodeId"))
+	}
+	if s.NodeId != nil && len(*s.NodeId) < 1 {
+		invalidParams.Add(request.NewErrParamMinLen("NodeId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLogPublishingConfiguration sets the LogPublishingConfiguration field's value.
+func (s *UpdateNodeInput) SetLogPublishingConfiguration(v *NodeLogPublishingConfiguration) *UpdateNodeInput {
+	s.LogPublishingConfiguration = v
+	return s
+}
+
+// SetMemberId sets the MemberId field's value.
+func (s *UpdateNodeInput) SetMemberId(v string) *UpdateNodeInput {
+	s.MemberId = &v
+	return s
+}
+
+// SetNetworkId sets the NetworkId field's value.
+func (s *UpdateNodeInput) SetNetworkId(v string) *UpdateNodeInput {
+	s.NetworkId = &v
+	return s
+}
+
+// SetNodeId sets the NodeId field's value.
+func (s *UpdateNodeInput) SetNodeId(v string) *UpdateNodeInput {
+	s.NodeId = &v
+	return s
+}
+
+type UpdateNodeOutput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateNodeOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateNodeOutput) GoString() string {
+	return s.String()
 }
 
 type VoteOnProposalInput struct {
@@ -5515,6 +7607,8 @@ func (s VoteOnProposalOutput) GoString() string {
 }
 
 // Properties of an individual vote that a member cast for a proposal.
+//
+// Applies only to Hyperledger Fabric.
 type VoteSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -5557,6 +7651,8 @@ func (s *VoteSummary) SetVote(v string) *VoteSummary {
 }
 
 // The voting rules for the network to decide if a proposal is accepted
+//
+// Applies only to Hyperledger Fabric.
 type VotingPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -5606,10 +7702,29 @@ const (
 	EditionStandard = "STANDARD"
 )
 
+// Edition_Values returns all elements of the Edition enum
+func Edition_Values() []string {
+	return []string{
+		EditionStarter,
+		EditionStandard,
+	}
+}
+
 const (
 	// FrameworkHyperledgerFabric is a Framework enum value
 	FrameworkHyperledgerFabric = "HYPERLEDGER_FABRIC"
+
+	// FrameworkEthereum is a Framework enum value
+	FrameworkEthereum = "ETHEREUM"
 )
+
+// Framework_Values returns all elements of the Framework enum
+func Framework_Values() []string {
+	return []string{
+		FrameworkHyperledgerFabric,
+		FrameworkEthereum,
+	}
+}
 
 const (
 	// InvitationStatusPending is a InvitationStatus enum value
@@ -5628,6 +7743,17 @@ const (
 	InvitationStatusExpired = "EXPIRED"
 )
 
+// InvitationStatus_Values returns all elements of the InvitationStatus enum
+func InvitationStatus_Values() []string {
+	return []string{
+		InvitationStatusPending,
+		InvitationStatusAccepted,
+		InvitationStatusAccepting,
+		InvitationStatusRejected,
+		InvitationStatusExpired,
+	}
+}
+
 const (
 	// MemberStatusCreating is a MemberStatus enum value
 	MemberStatusCreating = "CREATING"
@@ -5638,12 +7764,27 @@ const (
 	// MemberStatusCreateFailed is a MemberStatus enum value
 	MemberStatusCreateFailed = "CREATE_FAILED"
 
+	// MemberStatusUpdating is a MemberStatus enum value
+	MemberStatusUpdating = "UPDATING"
+
 	// MemberStatusDeleting is a MemberStatus enum value
 	MemberStatusDeleting = "DELETING"
 
 	// MemberStatusDeleted is a MemberStatus enum value
 	MemberStatusDeleted = "DELETED"
 )
+
+// MemberStatus_Values returns all elements of the MemberStatus enum
+func MemberStatus_Values() []string {
+	return []string{
+		MemberStatusCreating,
+		MemberStatusAvailable,
+		MemberStatusCreateFailed,
+		MemberStatusUpdating,
+		MemberStatusDeleting,
+		MemberStatusDeleted,
+	}
+}
 
 const (
 	// NetworkStatusCreating is a NetworkStatus enum value
@@ -5662,6 +7803,17 @@ const (
 	NetworkStatusDeleted = "DELETED"
 )
 
+// NetworkStatus_Values returns all elements of the NetworkStatus enum
+func NetworkStatus_Values() []string {
+	return []string{
+		NetworkStatusCreating,
+		NetworkStatusAvailable,
+		NetworkStatusCreateFailed,
+		NetworkStatusDeleting,
+		NetworkStatusDeleted,
+	}
+}
+
 const (
 	// NodeStatusCreating is a NodeStatus enum value
 	NodeStatusCreating = "CREATING"
@@ -5669,8 +7821,14 @@ const (
 	// NodeStatusAvailable is a NodeStatus enum value
 	NodeStatusAvailable = "AVAILABLE"
 
+	// NodeStatusUnhealthy is a NodeStatus enum value
+	NodeStatusUnhealthy = "UNHEALTHY"
+
 	// NodeStatusCreateFailed is a NodeStatus enum value
 	NodeStatusCreateFailed = "CREATE_FAILED"
+
+	// NodeStatusUpdating is a NodeStatus enum value
+	NodeStatusUpdating = "UPDATING"
 
 	// NodeStatusDeleting is a NodeStatus enum value
 	NodeStatusDeleting = "DELETING"
@@ -5681,6 +7839,20 @@ const (
 	// NodeStatusFailed is a NodeStatus enum value
 	NodeStatusFailed = "FAILED"
 )
+
+// NodeStatus_Values returns all elements of the NodeStatus enum
+func NodeStatus_Values() []string {
+	return []string{
+		NodeStatusCreating,
+		NodeStatusAvailable,
+		NodeStatusUnhealthy,
+		NodeStatusCreateFailed,
+		NodeStatusUpdating,
+		NodeStatusDeleting,
+		NodeStatusDeleted,
+		NodeStatusFailed,
+	}
+}
 
 const (
 	// ProposalStatusInProgress is a ProposalStatus enum value
@@ -5699,6 +7871,33 @@ const (
 	ProposalStatusActionFailed = "ACTION_FAILED"
 )
 
+// ProposalStatus_Values returns all elements of the ProposalStatus enum
+func ProposalStatus_Values() []string {
+	return []string{
+		ProposalStatusInProgress,
+		ProposalStatusApproved,
+		ProposalStatusRejected,
+		ProposalStatusExpired,
+		ProposalStatusActionFailed,
+	}
+}
+
+const (
+	// StateDBTypeLevelDb is a StateDBType enum value
+	StateDBTypeLevelDb = "LevelDB"
+
+	// StateDBTypeCouchDb is a StateDBType enum value
+	StateDBTypeCouchDb = "CouchDB"
+)
+
+// StateDBType_Values returns all elements of the StateDBType enum
+func StateDBType_Values() []string {
+	return []string{
+		StateDBTypeLevelDb,
+		StateDBTypeCouchDb,
+	}
+}
+
 const (
 	// ThresholdComparatorGreaterThan is a ThresholdComparator enum value
 	ThresholdComparatorGreaterThan = "GREATER_THAN"
@@ -5707,6 +7906,14 @@ const (
 	ThresholdComparatorGreaterThanOrEqualTo = "GREATER_THAN_OR_EQUAL_TO"
 )
 
+// ThresholdComparator_Values returns all elements of the ThresholdComparator enum
+func ThresholdComparator_Values() []string {
+	return []string{
+		ThresholdComparatorGreaterThan,
+		ThresholdComparatorGreaterThanOrEqualTo,
+	}
+}
+
 const (
 	// VoteValueYes is a VoteValue enum value
 	VoteValueYes = "YES"
@@ -5714,3 +7921,11 @@ const (
 	// VoteValueNo is a VoteValue enum value
 	VoteValueNo = "NO"
 )
+
+// VoteValue_Values returns all elements of the VoteValue enum
+func VoteValue_Values() []string {
+	return []string{
+		VoteValueYes,
+		VoteValueNo,
+	}
+}
