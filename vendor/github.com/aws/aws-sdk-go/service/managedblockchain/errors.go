@@ -2,6 +2,10 @@
 
 package managedblockchain
 
+import (
+	"github.com/aws/aws-sdk-go/private/protocol"
+)
+
 const (
 
 	// ErrCodeAccessDeniedException for service response error code
@@ -45,8 +49,8 @@ const (
 	// ErrCodeResourceNotFoundException for service response error code
 	// "ResourceNotFoundException".
 	//
-	// A requested resource does not exist on the network. It may have been deleted
-	// or referenced inaccurately.
+	// A requested resource does not exist. It may have been deleted or referenced
+	// inaccurately.
 	ErrCodeResourceNotFoundException = "ResourceNotFoundException"
 
 	// ErrCodeResourceNotReadyException for service response error code
@@ -64,4 +68,21 @@ const (
 	// such that your service limit for EC2 instances is exceeded. Request a limit
 	// increase or delete unused resources if possible.
 	ErrCodeThrottlingException = "ThrottlingException"
+
+	// ErrCodeTooManyTagsException for service response error code
+	// "TooManyTagsException".
+	ErrCodeTooManyTagsException = "TooManyTagsException"
 )
+
+var exceptionFromCode = map[string]func(protocol.ResponseMetadata) error{
+	"AccessDeniedException":          newErrorAccessDeniedException,
+	"IllegalActionException":         newErrorIllegalActionException,
+	"InternalServiceErrorException":  newErrorInternalServiceErrorException,
+	"InvalidRequestException":        newErrorInvalidRequestException,
+	"ResourceAlreadyExistsException": newErrorResourceAlreadyExistsException,
+	"ResourceLimitExceededException": newErrorResourceLimitExceededException,
+	"ResourceNotFoundException":      newErrorResourceNotFoundException,
+	"ResourceNotReadyException":      newErrorResourceNotReadyException,
+	"ThrottlingException":            newErrorThrottlingException,
+	"TooManyTagsException":           newErrorTooManyTagsException,
+}
